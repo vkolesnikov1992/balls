@@ -6,6 +6,7 @@ public class BallController : MonoBehaviour
 {
     private Vector3 _direction;
     private Rigidbody2D _rigidbody2D;
+    private TrajectoryRenderer _trajectoryRenderer;
 
     public float force;
     public float inpulseForce;
@@ -13,7 +14,8 @@ public class BallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _rigidbody2D = transform.GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _trajectoryRenderer = GetComponent<TrajectoryRenderer>();
     }
 
     // Update is called once per frame
@@ -32,13 +34,14 @@ public class BallController : MonoBehaviour
         {
             _direction = transform.position - mousePos;
             Debug.DrawRay(transform.position, _direction, Color.red);
-
+            _trajectoryRenderer.ShowTrajectory(transform.position, _direction);
 
         }
         else if (Input.GetMouseButtonUp(0))
         {
             _rigidbody2D.velocity = Vector3.zero;
             _rigidbody2D.AddForce(_direction * force, ForceMode2D.Impulse);
+            _trajectoryRenderer.ClearPoints();
         }
     }
 
