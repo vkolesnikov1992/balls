@@ -10,6 +10,7 @@ public class BallController : MonoBehaviour
 
     public float force;
     public float inpulseForce;
+    public float Energy = 250;
     
     // Start is called before the first frame update
     void Start()
@@ -30,18 +31,20 @@ public class BallController : MonoBehaviour
     {
         
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && Energy > 0)
         {
             _direction = transform.position - mousePos;
             Debug.DrawRay(transform.position, _direction, Color.red);
             _trajectoryRenderer.ShowTrajectory(transform.position, _direction);
+            Energy -= Time.deltaTime * 5;
 
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && Energy > 0)
         {
             _rigidbody2D.velocity = Vector3.zero;
-            _rigidbody2D.AddForce(_direction * force, ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(_direction.normalized * force, ForceMode2D.Impulse);
             _trajectoryRenderer.ClearPoints();
+            Energy -= 50;
         }
     }
 
@@ -61,7 +64,7 @@ public class BallController : MonoBehaviour
                 _rigidbody2D.AddForce(new Vector2(Random.Range(0, 4), 5) * inpulseForce, ForceMode2D.Impulse);
             }
 
-            Debug.DrawRay(collision.collider.transform.position, -collision.contacts[0].normal, Color.red, 2);
+            Energy += 50;
             
 
             Destroy(collision.collider.transform.gameObject);

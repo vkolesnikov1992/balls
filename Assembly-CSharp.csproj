@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BallController.cs" />
+    <Compile Include="Assets\Scripts\EnergyCounterUI.cs" />
     <Compile Include="Assets\Scripts\GenerationEnemy.cs" />
     <Compile Include="Assets\Scripts\ParticleEnemy.cs" />
     <Compile Include="Assets\Scripts\TrajectoryRenderer.cs" />
