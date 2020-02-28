@@ -10,7 +10,7 @@ public class GenerationEnemy : MonoBehaviour
     {
         for(int i = 0; i < enemyCount; i++)
         {
-            Instantiate(enemyPrefab, new Vector3(Random.Range(3, 140), Random.Range(3, 140)), Quaternion.identity);
+            Instantiate(enemyPrefab, new Vector3(Random.Range(3, 140), Random.Range(3, 293)), Quaternion.identity);
         }
     }
 

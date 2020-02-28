@@ -14,12 +14,12 @@ public class TrajectoryRenderer : MonoBehaviour
 
     public void ShowTrajectory(Vector3 origin, Vector3 speed)
     {
-        _points = new Vector3[5];
+        _points = new Vector3[20];
         _lineRenderer.positionCount = _points.Length;
 
         for(int i = 0; i < _points.Length; i++)
         {
-            float time = i * 0.1f;
+            float time = i * 0.2f;
 
             _points[i] = origin + speed * time + Physics.gravity * time * time / 2f;
         }
